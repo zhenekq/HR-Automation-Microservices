@@ -12,7 +12,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-name: ${env.PROJECT_NAME } CI
+name: ${PROJECT_NAME} CI
 
 jobs:
   build:
