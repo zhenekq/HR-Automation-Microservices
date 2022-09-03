@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+
+  candidate-service:
+    image: zhenekns/mifort-automation-user-service:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    networks:
+      - automation-network
+    depends_on:
+      - eureka-naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-naming-server:8761/eureka
+
+  communication-history-service:
+    image: zhenekns/mifort-automation-communication-history-service:0.0.1-SNAPSHOT
+    ports:
+      - "8001:8001"
+    networks:
+      - automation-network
+    depends_on:
+      - eureka-naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://eureka-naming-server:8761/eureka
+
+  eureka-naming-server:
+    image: zhenekns/mifort-automation-eureka-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - automation-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq_network
+
+networks:
+  automation-network:
+  rabbitmq_network:
+    driver: bridge
