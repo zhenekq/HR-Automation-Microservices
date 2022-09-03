@@ -71,6 +71,7 @@ jobs:
 
     # Build the Docker image
     - name: Build
+      working-directory: ./user-service
       run: |-
         docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
