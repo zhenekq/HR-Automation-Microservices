@@ -67,6 +67,10 @@ jobs:
 
       # Get the GKE credentials so we can deploy to the cluster
       - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+        run:
+          echo ${pwd}
+          echo ls -la
+          echo ls .target -la
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
@@ -76,9 +80,6 @@ jobs:
       - name: Build
         working-directory: ./user-service
         run: |-
-          echo ${pwd}
-          echo ls -la
-          echo ls .target -la
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
