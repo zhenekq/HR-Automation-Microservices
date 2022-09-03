@@ -30,5 +30,4 @@ jobs:
       run: mvn clean package -DskipTests
     - uses: actions/upload-artifact@v3
       with:
-        name: target
         path: user-service/target
