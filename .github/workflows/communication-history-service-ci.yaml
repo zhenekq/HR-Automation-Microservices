@@ -1,14 +1,12 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-env: 
-  PROJECT_NAME: communication-history-service
 on:
   push:
     branches: [ "main" ]
     paths:
-      - ${{ env.PROJECT_NAME }}/src/**
-      - .github/workflows/${{ env.PROJECT_NAME }}-ci.yaml
+      - communication-history-service/src/**
+      - .github/workflows/communication-history-service-ci.yaml
   pull_request:
     branches: [ "main" ]
 
@@ -27,9 +25,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      working-directory: ./${{ env.PROJECT_NAME }}
+      working-directory: ./communication-history-service
       run: mvn clean package -DskipTests
     - uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.PROJECT_NAME }}-artifact
-        path: ${{ env.PROJECT_NAME }}/target
+        name: communication-history-service-artifact
+        path: communication-history-service/target
