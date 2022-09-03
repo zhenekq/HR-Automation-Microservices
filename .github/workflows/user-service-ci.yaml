@@ -25,13 +25,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Cache Maven packages
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+    - name: Build with Maven
+      working-directory: ./user-service
+      run: mvn clean package
     - uses: actions/upload-artifact@v3
       with:
         name: target
-        path: ./user-service/target
+        path: ./target
