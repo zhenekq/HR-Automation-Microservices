@@ -76,6 +76,9 @@ jobs:
       - name: Build
         working-directory: ./user-service
         run: |-
+          echo ${pwd}
+          echo ls -la
+          echo ls .target -la
           docker build \
             --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
