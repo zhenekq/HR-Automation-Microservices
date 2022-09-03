@@ -75,17 +75,17 @@ jobs:
         with:
           name: user-service-0.0.1-SNAPSHOT
           path: ./user-service/target
-      - name: Get local path
-        run: pwd
-
-      - name: Get current packages
-        run: ls -la
-
-      - name: Get folder of user-service
-        run: ls ./user-service -la
-
-      - name: Get target folder pf user-service
-        run: ls ./user-service/target -la
+#      - name: Get local path
+#        run: pwd
+#
+#      - name: Get current packages
+#        run: ls -la
+#
+#      - name: Get folder of user-service
+#        run: ls ./user-service -la
+#
+#      - name: Get target folder pf user-service
+#        run: ls ./user-service/target -la
 
       # Build the Docker image
       - name: Build
@@ -104,12 +104,17 @@ jobs:
 
         # Set up kustomize
       - name: Set up Kustomize
+        working-directory: ./user-service
         run: |-
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
 
+      - name: Get folder of user-service
+        run: ls ./user-service -la
+
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
+        working-directory: ./user-service
         run: |-
           ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ./kustomize build . | kubectl apply -f -
