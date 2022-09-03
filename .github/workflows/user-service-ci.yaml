@@ -40,7 +40,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: user-service-0.0.1-SNAPSHOT
-          path: user-service/target
+          path: ./user-service/target
   deploy:
     needs: build
     name: Kubernetes Deploy
