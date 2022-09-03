@@ -71,7 +71,7 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
-
+      - uses: actions/download-artifact@v3
       - name: Get local path
         run: pwd
 
