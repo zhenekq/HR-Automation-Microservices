@@ -71,10 +71,9 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
-      - run: |-
-          echo ${pwd}
-          echo ls -la
-          echo ls .target -la
+      - run: echo ${pwd}
+      - run: ls -la
+      - run: ls .target -la
 
       # Build the Docker image
       - name: Build
