@@ -4,6 +4,7 @@ import com.mifort.hr.automation.microservices.userservice.data.Candidate;
 import com.mifort.hr.automation.microservices.userservice.data.CandidateDto;
 import com.mifort.hr.automation.microservices.userservice.request.CreateNewCandidate;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/candidate")
+@Slf4j
 public class CandidateController {
 
     private final CandidateService candidateService;
@@ -37,9 +39,11 @@ public class CandidateController {
     }
 
     @PostMapping
-    public ResponseEntity<Candidate> create(@Valid @RequestBody CreateNewCandidate createNewCandidate){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@Valid @RequestBody CreateNewCandidate createNewCandidate){
         Candidate candidate = modelMapper.map(createNewCandidate, Candidate.class);
-        return new ResponseEntity<Candidate>(candidateService.create(candidate), HttpStatus.CREATED);
+        Candidate createdCandidate = candidateService.create(candidate);
+        log.info("User with body -> {} created", createdCandidate);
     }
 
 }
