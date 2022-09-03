@@ -30,6 +30,11 @@ public class CandidateController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping
+    public String checkCI(){
+        return "SDFSDF";
+    }
+
     @GetMapping("/{candidateId}")
     public CandidateDto getById(@PathVariable String candidateId){
         Candidate candidate = candidateService.getById(candidateId);
