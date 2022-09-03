@@ -39,7 +39,7 @@ jobs:
         run: mvn clean package -DskipTests
       - uses: actions/upload-artifact@v3
         with:
-          name: User-Service-Artifact
+          name: user-service-0.0.1-SNAPSHOT
           path: user-service/target
   deploy:
     needs: build
