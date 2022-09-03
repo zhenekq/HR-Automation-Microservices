@@ -23,6 +23,7 @@ name: User Service CI/CD
 
 jobs:
   build:
+    name: Maven Build
     runs-on: ubuntu-latest
 
     steps:
@@ -42,7 +43,7 @@ jobs:
           path: user-service/target
   deploy:
     needs: build
-    name: Setup, Build, Publish, and Deploy
+    name: Kubernetes Deploy
     runs-on: ubuntu-latest
     environment: production
 
