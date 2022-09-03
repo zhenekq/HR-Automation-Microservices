@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-name: $PROJECT_NAME} CI
+name: communication-history-service CI
 
 jobs:
   build:
