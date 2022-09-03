@@ -10,7 +10,7 @@ on:
   pull_request:
     branches: [ "main" ]
 
-name: communication-history-service CI
+name: History Service CI
 
 jobs:
   build:
@@ -29,5 +29,5 @@ jobs:
       run: mvn clean package -DskipTests
     - uses: actions/upload-artifact@v3
       with:
-        name: communication-history-service-artifact
+        name: Communication-History-Service-Artifact
         path: communication-history-service/target
