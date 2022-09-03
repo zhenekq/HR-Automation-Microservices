@@ -72,6 +72,9 @@ jobs:
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
       - uses: actions/download-artifact@v3
+        with:
+          name: user-service-0.0.1-SNAPSHOT
+          path: ./user-service/target
       - name: Get local path
         run: pwd
 
