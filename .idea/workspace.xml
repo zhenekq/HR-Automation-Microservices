@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.CandidateServiceApplication">
     <configuration name="CandidateServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="user-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.mifort.hr.automation.microservices.userservice.CandidateServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommunicationHistoryServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="communication-history-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mifort.hr.automation.microservices.communicationhistoryservice.CommunicationHistoryServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaNamingServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="eureka-naming-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mifort.hr.automation.microservices.eurekanamingserver.EurekaNamingServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
