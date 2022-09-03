@@ -73,7 +73,7 @@ jobs:
           credentials: ${{ secrets.GKE_SA_KEY }}
       - run: echo ${pwd}
       - run: ls -la
-      - run: ls .target -la
+      - run: ls ./user-service/target -la
 
       # Build the Docker image
       - name: Build
