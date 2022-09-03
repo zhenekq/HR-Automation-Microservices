@@ -5,7 +5,7 @@
 on:
   push:
     branches: [ "main" ]
-    paths: user-service/src/**
+    paths: ["user-service/src/**", "./github/workflows/user-service-ci.yaml"]
   pull_request:
     branches: [ "main" ]
 
@@ -24,8 +24,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      with:
-        path: ./user-service
+      working-directory: ./user-service
       run: mvn -B package --file pom.xml
     - uses: actions/upload-artifact@v3
       with:
