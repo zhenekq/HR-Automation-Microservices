@@ -71,9 +71,18 @@ jobs:
           cluster_name: ${{ env.GKE_CLUSTER }}
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
-      - run: echo ${pwd}
-      - run: ls -la
-      - run: ls ./user-service/target -la
+
+      - name: Get local path
+        run: pwd
+
+      - name: Get current packages
+        run: ls -la
+
+      - name: Get folder of user-service
+        run: ls ./user-service -la
+
+      - name: Get target folder pf user-service
+        run: ls ./user-service/target -la
 
       # Build the Docker image
       - name: Build
