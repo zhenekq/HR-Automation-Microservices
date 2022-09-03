@@ -39,7 +39,6 @@ public class CandidateController {
     @PostMapping
     public ResponseEntity<Candidate> create(@Valid @RequestBody CreateNewCandidate createNewCandidate){
         Candidate candidate = modelMapper.map(createNewCandidate, Candidate.class);
-
         return new ResponseEntity<Candidate>(candidateService.create(candidate), HttpStatus.CREATED);
     }
 
