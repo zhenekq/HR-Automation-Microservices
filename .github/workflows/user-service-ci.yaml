@@ -6,7 +6,7 @@ env:
   GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: vozny-cluster   # TODO: update to cluster name
   GKE_ZONE: us-central1   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: vozny-deployment # TODO: update to deployment name
+  DEPLOYMENT_NAME: user-deployment # TODO: update to deployment name
   REPOSITORY: vozny-repository # TODO: update to Artifact Registry docker repository
   IMAGE: user-service
 
@@ -109,8 +109,19 @@ jobs:
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
 
-      - name: Get folder of user-service
-        run: ls ./user-service -la
+      - name: Create deployment files
+        working-directory: ./user-service/kubernetes-deployment
+        run: |-
+          kubectl get deployment user-deployment -o yaml >> deployment.yaml
+          kubectl get service user-deployment -o yaml >> service.yaml
+
+      - name: Get deployment files
+        run: ls ./user-service/kubernetes-deployment -la
+
+      - name: Get deployment.yaml
+        run: cat ./user-service/kubernetes-deployment/deployment.yaml
+      - name: Get service.yaml
+        run: cat ./user-service/kubernetes-deployment/service.yaml
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
