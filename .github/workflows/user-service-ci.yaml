@@ -111,18 +111,18 @@ jobs:
           mkdir -p user-service/kubernetes-deployment
 
       - name: Create deployment files
-        working-directory: ./user-service/kubernetes-deployment
+        working-directory: user-service/kubernetes-deployment
         run: |-
           kubectl get deployment user-deployment -o yaml >> deployment.yaml
           kubectl get service user-deployment -o yaml >> service.yaml
 
       - name: Get deployment files
-        run: ls ./user-service/kubernetes-deployment -la
+        run: ls user-service/kubernetes-deployment -la
 
       - name: Get deployment.yaml
-        run: cat ./user-service/kubernetes-deployment/deployment.yaml
+        run: cat user-service/kubernetes-deployment/deployment.yaml
       - name: Get service.yaml
-        run: cat ./user-service/kubernetes-deployment/service.yaml
+        run: cat user-service/kubernetes-deployment/service.yaml
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
