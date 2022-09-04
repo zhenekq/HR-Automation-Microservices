@@ -108,21 +108,20 @@ jobs:
         run: |-
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
-          mkdir -p user-service/kubernetes-deployment
 
       - name: Create deployment files
-        working-directory: user-service/kubernetes-deployment
+        working-directory: ./user-service
         run: |-
           kubectl get deployment user-deployment -o yaml >> deployment.yaml
           kubectl get service user-deployment -o yaml >> service.yaml
 
       - name: Get deployment files
-        run: ls user-service/kubernetes-deployment -la
+        run: ls ./user-service -la
 
       - name: Get deployment.yaml
-        run: cat user-service/kubernetes-deployment/deployment.yaml
+        run: cat ./user-service/deployment.yaml
       - name: Get service.yaml
-        run: cat user-service/kubernetes-deployment/service.yaml
+        run: cat ./user-service/service.yaml
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
