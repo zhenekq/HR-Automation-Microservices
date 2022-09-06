@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-communication-history-table
+      author: yauheni_vozny
+      changes:
+        - createTable:
+            tableName: communication_history
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(200)
+                  constraints:
+                    foreignKeyName: candidate_communication_history_fk
+                    referencedTableName: candidate
+                    referencedColumnNames: id
+                    nullable: false
