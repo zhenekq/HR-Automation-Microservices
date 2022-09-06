@@ -97,6 +97,9 @@ jobs:
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
 
+
+
+
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
