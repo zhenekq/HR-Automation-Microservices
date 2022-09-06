@@ -96,10 +96,6 @@ jobs:
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
             .
-
-
-
-
       # Push the Docker image to Google Container Registry
       - name: Publish
         run: |-
@@ -115,8 +111,8 @@ jobs:
       - name: Create deployment files
         working-directory: ./user-service
         run: |-
-          kubectl get deployment user-deployment -o yaml >> deployment.yaml
-          kubectl get service user-deployment -o yaml >> service.yaml
+          kubectl get deployment user-cluster -o yaml >> deployment.yaml
+          kubectl get service user-cluster -o yaml >> service.yaml
 
       - name: Get deployment files
         run: ls ./user-service -la
