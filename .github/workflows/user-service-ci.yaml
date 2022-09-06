@@ -111,8 +111,8 @@ jobs:
       - name: Create deployment files
         working-directory: ./user-service
         run: |-
-          kubectl get deployment vozny-cluster -o yaml >> deployment.yaml
-          kubectl get service vozny-cluster -o yaml >> service.yaml
+          kubectl get deployment user-deployment -o yaml >> deployment.yaml
+          kubectl get service user-deployment -o yaml >> service.yaml
 
       - name: Get deployment files
         run: ls ./user-service -la
