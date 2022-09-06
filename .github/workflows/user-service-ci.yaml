@@ -126,7 +126,7 @@ jobs:
       - name: Deploy
         working-directory: ./user-service
         run: |-
-          kustomize build ~/config
+          kustomize build ~/home/runner/work/HR-Automation-Microservices/HR-Automation-Microservices/user-service
           ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ./kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
