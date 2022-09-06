@@ -114,8 +114,8 @@ jobs:
           kubectl get deployment user-deployment -o yaml >> deployment.yaml
           kubectl get service user-deployment -o yaml >> service.yaml
 
-      - name: Get deployment files
-        run: ls ./user-service -la
+#      - name: Get deployment files
+#        run: ls ./user-service -la
 
 #      - name: Get deployment.yaml
 #        run: cat ./user-service/deployment.yaml
