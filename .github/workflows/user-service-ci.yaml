@@ -117,16 +117,17 @@ jobs:
       - name: Get deployment files
         run: ls ./user-service -la
 
-      - name: Get deployment.yaml
-        run: cat ./user-service/deployment.yaml
-      - name: Get service.yaml
-        run: cat ./user-service/service.yaml
+#      - name: Get deployment.yaml
+#        run: cat ./user-service/deployment.yaml
+#      - name: Get service.yaml
+#        run: cat ./user-service/service.yaml
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         working-directory: ./user-service
         run: |-
+          ./kustomize build . 
           ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-          ./kustomize build . | kubectl apply -f -
+          kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
