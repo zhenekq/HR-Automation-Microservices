@@ -14,20 +14,78 @@ name: History Service CI
 
 jobs:
   build:
+    name: Maven Build
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      working-directory: ./communication-history-service
-      run: mvn clean package -DskipTests
-    - uses: actions/upload-artifact@v3
-      with:
-        name: Communication-History-Service-Artifact
-        path: communication-history-service/target
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        working-directory: ./communication-history-service
+        run: mvn clean package -DskipTests
+      - uses: actions/upload-artifact@v3
+        with:
+          name: communication-history-service-0.0.1-SNAPSHOT
+          path: ./communication-history-service/target
+  deploy:
+    needs: build
+    name: Kubernetes Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+        with:
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+
+        # Configure Docker to use the gcloud command-line tool as a credential
+        # helper for authentication
+      - run: |-
+          gcloud --quiet auth configure-docker
+
+      # Get the GKE credentials so we can deploy to the cluster
+      - uses: google-github-actions/get-gke-credentials@fb08709ba27618c31c09e014e1d8364b02e5042e
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          location: ${{ env.GKE_ZONE }}
+          credentials: ${{ secrets.GKE_SA_KEY }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: communication-history-service-0.0.1-SNAPSHOT
+          path: ./communication-history-service/target
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./communication-history-service
+          file: ./communication-history-service/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/communication-history-service:0.0.1-SNAPSHOT
+
+      # Deploy the Docker image to the GKE cluster
+      - name: Deploy
+        working-directory: ./communication-history-service/kubernetes-deployment
+        run: |-
+          kubectl apply -f deployment.yaml
