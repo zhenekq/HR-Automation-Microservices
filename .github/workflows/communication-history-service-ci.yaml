@@ -1,6 +1,12 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: vozny-cluster   # TODO: update to cluster name
+  GKE_ZONE: us-central1   # TODO: update to cluster zone
+
+
 on:
   push:
     branches: [ "main" ]
