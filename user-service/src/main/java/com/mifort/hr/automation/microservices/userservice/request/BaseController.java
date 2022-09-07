@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping
     public String kubernetesWorks(){
-        return "Hello, Andrew. CI / CD Is works!!!";
+        return "Another try";
     }
 }
