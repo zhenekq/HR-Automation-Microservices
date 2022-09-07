@@ -97,4 +97,6 @@ jobs:
       - name: Deploy
         working-directory: ./user-service/kubernetes-deployment
         run: |-
+          ls
+          pwd
           kubectl apply -f deployment.yaml
