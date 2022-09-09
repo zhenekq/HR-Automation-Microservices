@@ -13,6 +13,7 @@ on:
     paths:
       - communication-history-service/src/**
       - .github/workflows/communication-history-service-ci.yaml
+      - communication-history-service/kubernetes-deployment/**
   pull_request:
     branches: [ "main" ]
 

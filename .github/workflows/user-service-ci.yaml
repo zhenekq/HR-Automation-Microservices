@@ -10,8 +10,9 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'user-service/src/**'
-      - '.github/workflows/user-service-ci.yaml'
+      - user-service/src/**
+      - .github/workflows/user-service-ci.yaml
+      - user-service/kubernetes-deployment/**
   pull_request:
     branches: [ "main" ]
 
