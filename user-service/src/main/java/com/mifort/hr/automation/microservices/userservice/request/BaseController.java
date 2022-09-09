@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping
     public String kubernetesWorks(){
-        return "Another try";
+        return "DATABASE CONNECTION";
     }
 }
