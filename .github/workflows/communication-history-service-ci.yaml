@@ -91,8 +91,21 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/communication-history-service:0.0.1-SNAPSHOT
 
+      - name: Replace Environment Variables
+        uses: danielr1996/envsubst-action@1.0.0
+        env:
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        with:
+          input: ./communication-history-service/kubernetes-deployment/deployment.yaml
+          output: ./communication-history-service/kubernetes-deployment/deploy.yaml
+
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         working-directory: ./communication-history-service/kubernetes-deployment
         run: |-
-          kubectl apply -f deployment.yaml
+          kubectl apply -f deploy.yaml
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/history-deployment
