@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping
     public String kubernetesWorks(){
-        return "MAX SURGE EQUALS TO ZERO";
+        return "WHY IT IS NOT WORKS?????????";
     }
 }
