@@ -3,7 +3,7 @@
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: vozny-cluster   # TODO: update to cluster name
+  GKE_CLUSTER: test-cluster   # TODO: update to cluster name
   GKE_ZONE: us-central1   # TODO: update to cluster zone
 
 
