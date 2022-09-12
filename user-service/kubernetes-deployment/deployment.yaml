@@ -91,7 +91,7 @@ spec:
       app: user-deployment
   strategy:
     rollingUpdate:
-      maxSurge: 0
+      maxSurge: 25%
       maxUnavailable: 25%
     type: RollingUpdate
   template:
