@@ -102,7 +102,13 @@ spec:
     spec:
       containers:
       - image: zhenekns/communication-history-service:0.0.1-SNAPSHOT
-        imagePullPolicy: Always
+        env:
+          - name: DATABASE_HOST
+            value: "$DATABASE_HOST"
+          - name: DATABASE_USERNAME
+            value: "$DATABASE_USERNAME"
+          - name: DATABASE_PASSWORD
+            value: "$DATABASE_PASSWORD"
         name: communication-history-service
         resources:
           limits:
