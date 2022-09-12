@@ -85,9 +85,7 @@ metadata:
   name: user-deployment
   namespace: default
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: user-deployment
@@ -103,7 +101,7 @@ spec:
     spec:
       containers:
       - image: zhenekns/user-service:0.0.1-SNAPSHOT
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: user-service
         env:
           - name: DATABASE_HOST
