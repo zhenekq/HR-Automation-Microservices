@@ -101,7 +101,7 @@ spec:
     spec:
       containers:
       - image: zhenekns/user-service:0.0.1-SNAPSHOT
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: user-service
         env:
           - name: DATABASE_HOST
