@@ -93,7 +93,7 @@ jobs:
       - name: Replace Environment Variables
         uses: danielr1996/envsubst-action@1.0.0
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         with:

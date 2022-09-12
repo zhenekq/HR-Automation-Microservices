@@ -106,7 +106,7 @@ spec:
         imagePullPolicy: Always
         name: user-service
         env:
-          - name: DATABASE_URL
+          - name: DATABASE_HOST
             value: "$DATABASE_HOST"
           - name: DATABASE_USERNAME
             value: "$DATABASE_USERNAME"
