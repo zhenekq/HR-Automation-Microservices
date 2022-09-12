@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping
     public String kubernetesWorks(){
-        return "DELETE OLD REPLICAS";
+        return "MAX SURGE EQUALS TO ZERO";
     }
 }
