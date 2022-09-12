@@ -102,6 +102,7 @@ spec:
     spec:
       containers:
       - image: zhenekns/communication-history-service:0.0.1-SNAPSHOT
+        imagePullPolicy: Always
         env:
           - name: DATABASE_HOST
             value: "$DATABASE_HOST"
