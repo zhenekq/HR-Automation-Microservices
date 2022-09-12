@@ -11,6 +11,39 @@ metadata:
     fieldsType: FieldsV1
     fieldsV1:
       f:metadata:
+        f:annotations:
+          f:deployment.kubernetes.io/revision: {}
+      f:status:
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:observedGeneration: {}
+        f:replicas: {}
+        f:unavailableReplicas: {}
+        f:updatedReplicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    subresource: status
+    time: "2022-09-12T12:24:19Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
         f:labels:
           .: {}
           f:app: {}
@@ -47,41 +80,7 @@ metadata:
             f:terminationGracePeriodSeconds: {}
     manager: kubectl-create
     operation: Update
-    time: "2022-09-12T09:48:37Z"
-  - apiVersion: apps/v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:metadata:
-        f:annotations:
-          f:deployment.kubernetes.io/revision: {}
-      f:status:
-        f:availableReplicas: {}
-        f:conditions:
-          .: {}
-          k:{"type":"Available"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-          k:{"type":"Progressing"}:
-            .: {}
-            f:lastTransitionTime: {}
-            f:lastUpdateTime: {}
-            f:message: {}
-            f:reason: {}
-            f:status: {}
-            f:type: {}
-        f:observedGeneration: {}
-        f:readyReplicas: {}
-        f:replicas: {}
-        f:updatedReplicas: {}
-    manager: kube-controller-manager
-    operation: Update
-    subresource: status
-    time: "2022-09-12T09:50:45Z"
+    time: "2022-09-12T12:24:19Z"
   name: history-deployment
   namespace: default
 spec:
@@ -103,15 +102,7 @@ spec:
     spec:
       containers:
       - image: zhenekns/communication-history-service:0.0.1-SNAPSHOT
-        imagePullPolicy: Always
         name: communication-history-service
-        env:
-          - name: DATABASE_HOST
-            value: "$DATABASE_HOST"
-          - name: DATABASE_USERNAME
-            value: "$DATABASE_USERNAME"
-          - name: DATABASE_PASSWORD
-            value: "$DATABASE_PASSWORD"
         resources:
           limits:
             cpu: 500m
@@ -168,7 +159,7 @@ metadata:
           f:type: {}
       manager: kubectl-expose
       operation: Update
-      time: "2022-09-12T09:49:07Z"
+      time: "2022-09-12T12:24:43Z"
     - apiVersion: v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -182,21 +173,21 @@ metadata:
       manager: kube-controller-manager
       operation: Update
       subresource: status
-      time: "2022-09-12T09:49:35Z"
+      time: "2022-09-12T12:25:11Z"
   name: history-deployment
   namespace: default
 spec:
   allocateLoadBalancerNodePorts: true
-  clusterIP: 10.32.0.88
+  clusterIP: 10.32.1.8
   clusterIPs:
-    - 10.32.0.88
+    - 10.32.1.8
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-    - nodePort: 30582
+    - nodePort: 30979
       port: 8001
       protocol: TCP
       targetPort: 8001
