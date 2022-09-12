@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping
     public String testCD(){
-        return "CI / CD for history service is working";
+        return "LAST CHANCE";
     }
 }
