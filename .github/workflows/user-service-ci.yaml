@@ -3,7 +3,7 @@
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: vozny-cluster   # TODO: update to cluster name
+  GKE_CLUSTER: test-cluster   # TODO: update to cluster name
   GKE_ZONE: us-central1   # TODO: update to cluster zone
 
 on:
@@ -90,10 +90,21 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/user-service:0.0.1-SNAPSHOT
 
+      - name: Replace Environment Variables
+        uses: danielr1996/envsubst-action@1.0.0
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        with:
+          input: deployment.yaml
+          output: deploy.yaml
+
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         working-directory: ./user-service/kubernetes-deployment
         run: |-
-          ls
-          pwd
-          kubectl apply -f deployment.yaml
+          kubectl apply -f deploy.yaml
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/user-deployment
