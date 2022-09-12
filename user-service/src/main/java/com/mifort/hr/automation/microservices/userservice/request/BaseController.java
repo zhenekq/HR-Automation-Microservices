@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     @GetMapping
     public String kubernetesWorks(){
-        return "LAST CHANCE v2";
+        return "MERA LAST CHANCE ULTRA MEGA LASTCHANGE VVVVV#####";
     }
 }
