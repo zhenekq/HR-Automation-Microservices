@@ -97,8 +97,8 @@ jobs:
           DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         with:
-          input: deployment.yaml
-          output: deploy.yaml
+          input: ./user-service/kubernetes-deployment/deployment.yaml
+          output: ./user-service/kubernetes-deployment/deploy.yaml
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
